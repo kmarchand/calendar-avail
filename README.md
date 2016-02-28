@@ -1,5 +1,5 @@
 # calendar-avail
-Python script to copy Mac Calendar data to clipboard
+Python script to copy Mac Calendar data to clipboard.  Includes a workflow for Alfred 2.
 
 Running the script will copy either a schedule summary or a busy/available list to the clipboard.  Which one it copies is set at the end of the script (comment out one or the other):
 
