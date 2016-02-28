@@ -16,3 +16,7 @@ Settings at the start of the file can be used to specify the look-ahead day coun
 ### Specify Calendars
 
 To specify calendars, modify the settings at the start of the script to change `show_all_cal` to `False` and populate `cal_list` with a list of calendar IDs (in paren, comma separated).  The `calendar-avail-listcals.py` script can be run to get a list of calendar IDs.
+
+### Timezones
+
+Please note, the default timezone is set at the start of the script to `'America/Toronto'`.  It should hopefully work if you are in a different timezone and update that setting to match (using a value from here: http://stackoverflow.com/q/13866926), but I haven't tested for other timezones.
