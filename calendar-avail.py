@@ -216,7 +216,7 @@ for d in lookahead_days:
     busy_minutes_filtered = set()
 
     for m in busy_minutes:
-        if m < day_end:
+        if m < day_end and m > day_start:
             busy_minutes_filtered.add(m)
 
     avail_minutes = day_minutes.symmetric_difference(busy_minutes_filtered)
