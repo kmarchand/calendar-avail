@@ -37,6 +37,9 @@ work_start_hour = 9
 # hour of start of work days (24h clock, in local time)
 work_end_hour = 17
 
+# Whether or not to include Saturday and Sunday
+skip_weekends = True
+
 # show all calendars or only specified ones (see next setting)
 show_all_cal = True
 
@@ -44,14 +47,6 @@ show_all_cal = True
 # calendar IDs can be identified by running "calendar-avail-listcals.py"
 cal_list = '(60)'
 
-
-# Figure out if timezone offset should be positive or negative from UTC
-
-if datetime.datetime.utcnow() > datetime.datetime.now():
-    tz_offset_seconds = abs(datetime.datetime.now() - datetime.datetime.utcnow()).seconds
-    tz_offset_seconds = 0 - tz_offset_seconds
-else:
-    tz_offset_seconds = abs(datetime.datetime.now() - datetime.datetime.utcnow()).seconds
 
 
 # Offset the start and end times for the db query from the calendar epoch and convert to seconds
@@ -143,8 +138,8 @@ sched_text = ''
 for d in lookahead_days:
 
     wd = calendar.day_name[d.weekday()]
-    if wd == 'Saturday' or wd == 'Sunday':
-        continue
+    if skip_weekends == True and (wd == 'Saturday' or wd == 'Sunday'):
+            continue
 
     sched_text += '\n'
     sched_text += wd + ' - ' + str(d)[:10] + '\n\n'
@@ -170,11 +165,10 @@ for d in lookahead_days:
     busy_avail = []
     utc = pytz.timezone('UTC')
 
-    # Skip weekends
-
     wd = calendar.day_name[d.weekday()]
-    if wd == 'Saturday' or wd == 'Sunday':
-        continue
+
+    if skip_weekends == True and (wd == 'Saturday' or wd == 'Sunday'):
+            continue
 
     # Check if each entry in the overall list of events occured on this date
 
