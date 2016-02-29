@@ -193,16 +193,14 @@ for d in lookahead_days:
     day_start_local = d.astimezone(pytz.timezone (default_timezone)).replace(
         hour=work_start_hour, minute=0, second=0, microsecond=0)
 
-    if d.day != day_start_local:
-        d_offset = d.day - day_start_local.day
-        day_start_local = day_start_local + datetime.timedelta(days=d_offset)
+    if d.day != day_start_local.day:
+        day_start_local = day_start_local + datetime.timedelta(days=1)
 
     day_end_local = d.astimezone(pytz.timezone (default_timezone)).replace(
         hour=work_end_hour, minute=0, second=0, microsecond=0)
 
-    if d.day != day_end_local:
-        d_offset = d.day - day_end_local.day
-        day_end_local = day_end_local + datetime.timedelta(days=d_offset)
+    if d.day != day_end_local.day:
+        day_end_local = day_end_local + datetime.timedelta(days=1)
 
     day_start = day_start_local.astimezone(utc)
     day_end = day_end_local.astimezone(utc)
